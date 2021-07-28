@@ -134,21 +134,26 @@
         const secondHand = document.querySelector('.second-hand');
         const minHand = document.querySelector('.min-hand');
         const hourHand = document.querySelector('.hour-hand');
+
+        const calculateDegrees = (time, maxTime) => ((time / maxTime) * 360) + 90;
+
         function setDate() {
+            // Create new Date
             const now = new Date();
-            const seconds = now.getSeconds();
-            const secondsDegrees = ((seconds / 60) * 360) + 90;
+
+            // Get current seconds, minutes, hours and calculate degrees
+            const
+                secondsDegrees = calculateDegrees(now.getSeconds(), 60),
+                minutesDegrees = calculateDegrees(now.getMinutes(), 60),
+                hoursDegrees = calculateDegrees(now.getHours(), 12);
+
+
             secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
-
-            const mins = now.getMinutes();
-            const minsDegrees = ((mins / 60) * 360) + 90;
-            minHand.style.transform = `rotate(${minsDegrees}deg)`;
-
-            const hours = now.getHours();
-            const hoursDegrees = ((hours / 12) * 360) + 90;
+            minHand.style.transform = `rotate(${minutesDegrees}deg)`;
             hourHand.style.transform = `rotate(${hoursDegrees}deg)`;
 
-            if(seconds==0){
+            // Resetting second hand when it reaches to 12
+            if(seconds == 0){
                 secondHand.style.transitionDuration = '0s';
                 minHand.style.transitionDuration = '0s';
                 hourHand.style.transitionDuration = '0s';
