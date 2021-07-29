@@ -4,7 +4,54 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>CSS Variables</title>
+    <style>
+        :root {
+            --base: #ffc600;
+            --spacing: 10px;
+            --blur: 10px;
+        }
+
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        html {
+            display: flex;
+            text-align: center;
+            flex: 1;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background-color: rgb(21, 54, 54);
+        }
+
+        .h1 {
+            color: var(--base);
+        }
+
+        h2 {
+            font-size: 3rem;
+            color: #fff;
+            font-weight: 800;
+            margin: 60px 0px;
+        }
+
+        img {
+            margin-top: 60px;
+            padding: var(--spacing);
+            /* border: 50px solid #ffc600; */
+            background-color: var(--base);
+            filter: blur(var(--blur));
+        }
+
+        label {
+            font-size: 1.9rem;
+            color: #fff;
+            font-weight: 200;
+        }
+    </style>
 </head>
 <body>
     <h2>Update CSS Variables with <span class='h1'>JS</span></h2>
@@ -18,7 +65,18 @@
         <label for="base">Base Color</label>
         <input type="color" name="base" value="#ffc600">
 
-        <img src="http://unsplash.it/800/500?image=899" alt="">
+        <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80" alt="">
     </div>
+
+    <script>
+        const inputs = document.querySelectorAll('.controls input');
+
+        function handleUpdate() {
+            console.log(this.value)
+
+        }
+
+        inputs.forEach(input => input.addEventListener('change', handleUpdate));
+    </script>
 </body>
 </html>
