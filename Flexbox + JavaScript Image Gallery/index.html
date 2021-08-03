@@ -80,7 +80,7 @@
       text-shadow: 0 0 4px rgba(0, 0, 0, 0.72), 0 0 14px rgba(0, 0, 0, 0.45);
       font-size: 2em;
     }
-    
+
     .panel p:nth-child(2) {
       font-size: 4em;
     }
@@ -100,9 +100,9 @@
       <p>Dance</p>
     </div>
     <div class="panel panel2">
-      <p>Give</p>
-      <p>Take</p>
-      <p>Receive</p>
+        <p>Give</p>
+        <p>Take</p>
+        <p>Receive</p>
     </div>
     <div class="panel panel3">
       <p>Experience</p>
@@ -125,7 +125,20 @@
 
   </script>
 
-
+<script>
+    const panels = document.querySelectorAll('.panel');
+    function toggleOpen() {
+        this.classList.toggle('open');
+        console.log('helo')
+    }
+    function toggleActive(e) {
+        if(e.propertyName.includes('flex')) {
+            this.classList.toggle('open-active');
+        }
+    }
+    panels.forEach(panel => panel.addEventListener('click', toggleOpen));
+    panels.forEach(panel => panel.addEventListener('transitionend',  toggleActive));
+</script>
 
 </body>
 </html>
