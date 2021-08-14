@@ -14,15 +14,34 @@ let lastX = 0;
 let lastY = 0;
 let hue = 0;
 let direction = true;
+let palette = {};
+const colorBoxes = document.querySelectorAll('.box');
 function addToPalette() {
-    const palette = document.querySelectorAll('.color');
-    //here I left
-    console.log(palette[0])
-}
-addToPalette();
-function setColor() {
-    ctx.strokeStyle = color.value;
-}
+    // for(let i = 0; i < colorBoxes.length; i++) {
+         palette = {
+             box1: {
+                 color: color.value,
+                 isSelected: true,
+             },
+             box2: {
+                color: color.value,
+                isSelected: true,
+            }
+            // }
+            // colorBoxes[i].style.background = palette.box.color;
+        }
+    }
+    console.log(palette)
+    
+    function setColor() {
+        addToPalette();
+        const color1 = document.querySelector('#color');
+        ctx.strokeStyle = color.value;
+        colorBoxes[0].style.background = palette.box.color;
+        colorBoxes[1].style.background = color.value;
+        // console.log(color1)
+    }
+    
 function draw(e) {
     if(!isDrawing) return; // Stop the funtion from running when they are not mouse down.
     // console.log(e)
