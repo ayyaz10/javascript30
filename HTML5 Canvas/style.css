@@ -1,8 +1,13 @@
 html, body {
-    margin: 0;
-    padding: 0;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
 canvas {
     margin-top: 20px;
     border: 5px solid black;
@@ -18,39 +23,62 @@ canvas {
 
   /* color-palette */
 
+
+  .color-picker {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      height: 50px;
+  }
+
+  .color-picker p {
+    font-size: .875rem;
+  }
+
 .color-container {
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    /* border: 1px solid red; */
 }
 
 .main-color-container {
     margin-left: 20px;
-    align-self: flex-end;
     display: flex;
     flex-direction: column;
+    height: 50px;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
 }
 
 .main-color-container p {
     text-align: center;
+    font-size: .875rem;
+    font-weight: 700;
 }
 
 .main-color {
     display: inline-block;
     border: 1px solid black;
-    background: green;
-    width: 35px;
-    height: 35px;
+    /* background: green; */
+    width: 30px;
+    height: 30px;
     /* align-self: flex-end; */
 }
 
+.main-color:hover, .color-palette:hover {
+    cursor: pointer;
+}
+
+
 .color-palette {
-    align-self: flex-end;
+    /* align-self: flex-end; */
     display: flex;
     flex-wrap: wrap;
     width: 108px;
     margin-left: 20px;
-
 }
 
 .color-palette .box {

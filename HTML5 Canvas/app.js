@@ -1,5 +1,7 @@
 const canvas = document.querySelector('#draw');
 const color = document.querySelector('#color');
+const colorBoxes = document.querySelectorAll('.box');
+const mainColor = document.querySelector('.main-color');
 const ctx = canvas.getContext('2d');
 // canvas.width = window.innerWidth;
 // canvas.height = window.innerHeight;
@@ -21,20 +23,26 @@ let palettes = [
     { color: "#ffb703", isSelected: false },
     { color: "#000000", isSelected: false },
 ];
+function addDefaultPalette() {
+    // adding default color to mainColor 
+    mainColor.style.background = color.value;
 
-function addToPalette() {
-    const colorBoxes = document.querySelectorAll('.box');
-    const colorPalette = Array.prototype.slice.call(colorBoxes)
+    // adding colors to palettes
+    const colorPalettes = Array.prototype.slice.call(colorBoxes);
     palettes.forEach((palette, i) => {
         if(typeof(palette !== 'undefined')) {
-            colorPalette[i].style.background = palette.color;
+            colorPalettes[i].style.background = palette.color;
         }
     })
 }
-addToPalette();
+
+function updateColor() {
+    mainColor.style.background = color.value;
+}
 
 function setColor() {
     ctx.strokeStyle = color.value;
+    updateColor();
 }
     
 function draw(e) {
@@ -72,7 +80,14 @@ canvas.addEventListener('mousedown', (e) => {
     [lastX, lastY] = [e.offsetX, e.offsetY];
 });
 
+addDefaultPalette();
 canvas.addEventListener('mousemove', draw);
 canvas.addEventListener('mouseup', () => isDrawing = false);
 canvas.addEventListener('mouseout', () => isDrawing = false);
 color.addEventListener('change', setColor);
+colorBoxes.forEach(box => {
+    box.addEventListener('click', (e) => {
+        mainColor.style.background = e.target.style.background;
+        ctx.strokeStyle = e.target.style.background;
+    })
+})
