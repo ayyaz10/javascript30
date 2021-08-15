@@ -14,32 +14,26 @@ let lastX = 0;
 let lastY = 0;
 let hue = 0;
 let direction = true;
-let palette = {};
+let palettes = [
+    { color: "#e63946", isSelected: false },
+    { color: "#03045e", isSelected: false },
+    { color: "#ffb703", isSelected: false },
+    { color: "#000000", isSelected: false },
+];
 const colorBoxes = document.querySelectorAll('.box');
+const colorPalette = Array.prototype.slice.call(colorBoxes)
+
 function addToPalette() {
-    // for(let i = 0; i < colorBoxes.length; i++) {
-         palette = {
-             box1: {
-                 color: color.value,
-                 isSelected: true,
-             },
-             box2: {
-                color: color.value,
-                isSelected: true,
-            }
-            // }
-            // colorBoxes[i].style.background = palette.box.color;
+    palettes.forEach((palette, i) => {
+        if(typeof(palette !== 'undefined')) {
+            colorPalette[i].style.background = palette.color;
         }
-    }
-    console.log(palette)
+    })
+}
     
+addToPalette();
     function setColor() {
-        addToPalette();
-        const color1 = document.querySelector('#color');
         ctx.strokeStyle = color.value;
-        colorBoxes[0].style.background = palette.box.color;
-        colorBoxes[1].style.background = color.value;
-        // console.log(color1)
     }
     
 function draw(e) {
