@@ -17,7 +17,7 @@
         }
 
         html {
-            background: #018DED url(http://unsplash.it/1500/1000?image=881&blur=50);
+            background: #018DED url(http://unsplash.it/1500/1000?image=881&blur=0.2);
             background-size: cover;
             font-family: 'helvetica neue';
             text-align: center;
@@ -69,24 +69,28 @@
             border: 20px solid white;
             border-radius: 50%;
             margin: 50px auto;
+            position: relative;
         }
 
         .clock-face {
             position: relative;
             width: 100%;
             height: 100%;
-            transform: translateY(-3px); /* account for the height of the clock hands */
+            transform: translateY(-3px);
+            transform: rotate(90deg);
+             /* account for the height of the clock hands */
         }
-        /* .center-hole {
+        .center-hole {
             width: 10%;
             height: 10%;
             background: black;
             position: absolute;
-            top: 44%;
-            left: 46%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             border-radius: 50%;
             z-index: 99;
-        } */
+        }
 
         .hand {
             width: 50%;
@@ -96,22 +100,27 @@
             position: absolute;
             top: 50%;
             transform-origin: 100%;
-            transform: rotate(90deg);
+   
             transition: all 0.05s;
             transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
             z-index: 1;
         }
 
         .hour-hand {
+            width: 40%;
+            height: 10px;
+            left: 9%;
             background: var(--hour-hand-color);
         }
         .min-hand {
+            height: 8px;
             background: var(--min-hand-color);
         }
         .second-hand {
+            height: 4px;
+            transform: translate(-50%, -50%);
             background: var(--sec-hand-color);
         }
-
     </style>
     <title>Clock</title>
 </head>
@@ -135,9 +144,12 @@
         const minHand = document.querySelector('.min-hand');
         const hourHand = document.querySelector('.hour-hand');
 
-        const calculateDegrees = (time, maxTime) => ((time / maxTime) * 360) + 90;
-
+        const calculateDegrees = (time, maxTime) => ((time / maxTime) * 360);
+        let time = new Date();
+        let seconds = time.getSeconds();
         function setDate() {
+
+ 
             // Create new Date
             const now = new Date();
 
@@ -151,16 +163,12 @@
             secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
             minHand.style.transform = `rotate(${minutesDegrees}deg)`;
             hourHand.style.transform = `rotate(${hoursDegrees}deg)`;
-
             // Resetting second hand when it reaches to 12
-            if(seconds == 0){
-                secondHand.style.transitionDuration = '0s';
-                minHand.style.transitionDuration = '0s';
-                hourHand.style.transitionDuration = '0s';
+            const hands = document.querySelectorAll('.hand');
+            if (seconds === 0) {
+                hands.forEach(hand => hand.style.transitionDuration = '0s');
             } else {
-                secondHand.style.transitionDuration = '0.05s';
-                minHand.style.transitionDuration = '0.05s';
-                hourHand.style.transitionDuration = '0.05s';
+                hands.forEach(hand => hand.style.transitionDuration = '0.05s');
             }
         }
         setInterval(setDate, 1000);
